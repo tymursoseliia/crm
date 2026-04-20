@@ -76,6 +76,7 @@ export default function OperationsTableView({
             </th>
             <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700">Клоузер</th>
             <th className="px-4 py-3 text-right text-xs font-semibold text-gray-700">Сумма RUB</th>
+            <th className="px-4 py-3 text-right text-xs font-semibold text-gray-700">Курс</th>
             <th className="px-4 py-3 text-right">
               <button
                 onClick={() => onSort('amount')}
@@ -112,14 +113,31 @@ export default function OperationsTableView({
                     {op.team === 'voha' ? 'Воха' : 'Офис'}
                   </Badge>
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-900">
-                  {manager?.name || 'Неизвестен'}
+                <td className="px-4 py-3">
+                  <div className="text-sm font-medium text-gray-900">{manager?.name || 'Неизвестен'}</div>
+                  {manager && (
+                    <div className="text-xs text-gray-500 mt-0.5">
+                      {op.type === 'растаможка' ? manager.percentRastamozhka : manager.percentDobiv}% • <span className="text-green-600 font-semibold">${formatUSDT(op.managerEarning || 0)}</span>
+                    </div>
+                  )}
                 </td>
-                <td className="px-4 py-3 text-sm text-gray-600">
-                  {closer ? closer.name : '-'}
+                <td className="px-4 py-3">
+                  {closer ? (
+                    <>
+                      <div className="text-sm font-medium text-gray-900">{closer.name}</div>
+                      <div className="text-xs text-gray-500 mt-0.5">
+                        {op.type === 'растаможка' ? closer.percentRastamozhka : closer.percentDobiv}% • <span className="text-green-600 font-semibold">${formatUSDT(op.closerEarning || 0)}</span>
+                      </div>
+                    </>
+                  ) : (
+                    <span className="text-sm text-gray-600">-</span>
+                  )}
                 </td>
                 <td className="px-4 py-3 text-right text-sm font-medium text-gray-900">
                   {op.sumRub.toLocaleString()} ₽
+                </td>
+                <td className="px-4 py-3 text-right text-sm text-gray-600">
+                  {op.exchangeRate}
                 </td>
                 <td className="px-4 py-3 text-right text-sm font-bold text-green-600">
                   ${formatUSDT(op.usdtAfterCommission)}
