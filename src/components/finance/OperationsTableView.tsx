@@ -109,7 +109,7 @@ export default function OperationsTableView({
                 </td>
                 <td className="px-4 py-3">
                   <Badge variant="outline" className="text-xs">
-                    {op.team === 'vady' ? 'Вадя' : 'Офис'}
+                    {op.team === 'voha' ? 'Воха' : 'Офис'}
                   </Badge>
                 </td>
                 <td className="px-4 py-3 text-sm text-gray-900">

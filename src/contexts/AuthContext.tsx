@@ -5,7 +5,7 @@ import type { Employee } from "@/types/finance";
 import { supabase, dbToApp } from "@/lib/supabase";
 
 export type AuthUser = 
-  | { role: 'admin'; id: 'admin'; name: 'Вадим' }
+  | { role: 'admin'; id: 'admin'; name: 'Вохим' }
   | { role: 'employee'; employee: Employee; id: string; name: string };
 
 interface AuthContextType {
@@ -80,7 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const authUser: AuthUser = {
         role: 'admin',
         id: 'admin',
-        name: 'Вадим'
+        name: 'Вохим'
       };
       setUser(authUser);
       localStorage.setItem("auth_user", JSON.stringify(authUser));

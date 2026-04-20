@@ -246,7 +246,7 @@ export default function CRMLeadsTab() {
 
     // Определяем команду по менеджеру
     const manager = employees.find(e => e.id === finalManagerId);
-    const teamId = manager?.team || 'vady';
+    const teamId = manager?.team || 'voha';
 
     const newLead: Lead = {
       id: editingLead?.id || `lead-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -658,7 +658,7 @@ export default function CRMLeadsTab() {
                   className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
                 >
                   <option value="all">Все команды</option>
-                  <option value="vady">Команда Вади</option>
+                  <option value="voha">Команда Вохи</option>
                 </select>
 
                 {/* Фильтр по менеджеру */}
@@ -1037,7 +1037,7 @@ export default function CRMLeadsTab() {
                     .filter(e => e.role === 'manager')
                     .map(manager => (
                       <option key={manager.id} value={manager.id}>
-                        {manager.name} {manager.team === 'vady' ? '(Команда Вади)' : ''}
+                        {manager.name} {manager.team === 'voha' ? '(Команда Вохи)' : ''}
                       </option>
                     ))}
                 </select>

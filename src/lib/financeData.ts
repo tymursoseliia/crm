@@ -7,29 +7,30 @@ export const initialDrops: Drop[] = [
   { id: 'drop3', name: 'Дроп 3', commission: 25 },
 ];
 
-// Команда Вади
-const vadyTeam: Employee[] = [
-  { id: 'philipp_plein', name: 'Philipp Plein', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'kolomoyskiy', name: 'Коломойский', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'an_225', name: 'АН-225', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'matros', name: 'Матрос', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'tefal', name: 'Tefal', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'reno', name: 'Reno', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'hugo', name: 'HUGO', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'shura', name: 'Шура', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'shtil', name: 'Штиль', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'ceo', name: 'CEO', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'malish', name: 'Малыш', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'lada', name: 'LADA', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'piton', name: 'Питон', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'adidas', name: 'Adidas', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'exel', name: 'EXEL', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'valeryana', name: 'Валерьяна', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'stone_island', name: 'Stone Island', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'cp_company', name: 'C.P Company', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'ufc', name: 'UFC', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'tyazhik', name: 'Тяжик', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
-  { id: 'borchik', name: 'Борчик', role: 'manager', team: 'vady', salary: 350, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+// Команда Вохи
+const vohaTeam: Employee[] = [
+  { id: 'philipp_plein', name: 'Philipp Plein', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'kolomoyskiy', name: 'Коломойский', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'an_225', name: 'АН-225', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'matros', name: 'Матрос', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'tefal', name: 'Tefal', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'reno', name: 'Reno', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'hugo', name: 'HUGO', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'shura', name: 'Шура', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'shtil', name: 'Штиль', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'ceo', name: 'CEO', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'malish', name: 'Малыш', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'lada', name: 'LADA', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'piton', name: 'Питон', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'adidas', name: 'Adidas', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'exel', name: 'EXEL', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'valeryana', name: 'Валерьяна', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'stone_island', name: 'Stone Island', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'cp_company', name: 'C.P Company', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'ufc', name: 'UFC', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'tyazhik', name: 'Тяжик', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'borchik', name: 'Борчик', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
+  { id: 'vanya_pasha_2in1', name: 'Ваня + Пашка (2 в 1)', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 5, percentDobiv: 5, percentProfit: 0, isSpecial: false },
 ];
 
 
@@ -59,7 +60,7 @@ const specialRoles: Employee[] = [
 ];
 
 export const initialEmployees: Employee[] = [
-  ...vadyTeam,
+  ...vohaTeam,
   ...closers,
   ...itDepartment,
   ...specialRoles,

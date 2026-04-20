@@ -304,7 +304,7 @@ export default function OperationsTab() {
         usdtAfterCommission,
         managerEarning,
         closerEarning: formData.type === 'добив' ? closerEarning : undefined,
-        team: manager.team || 'vady',
+        team: manager.team || 'voha',
       };
 
       await updateOperation(editingOperation.id, updatedOperation);
@@ -325,7 +325,7 @@ export default function OperationsTab() {
         usdtAfterCommission,
         managerEarning,
         closerEarning: formData.type === 'добив' ? closerEarning : undefined,
-        team: manager.team || 'vady',
+        team: manager.team || 'voha',
       };
 
       addOperation(newOperation);
@@ -489,7 +489,7 @@ export default function OperationsTab() {
                 className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="all">Все команды</option>
-                <option value="vady">Команда Вади</option>
+                <option value="voha">Команда Вохи</option>
 
               </select>
 
@@ -877,6 +877,8 @@ export default function OperationsTab() {
                             managerId: '',
                             closerId: '',
                             comment: '',
+                            managerPercent: '',
+                            closerPercent: '',
                           });
                         }}
                         className="w-full"

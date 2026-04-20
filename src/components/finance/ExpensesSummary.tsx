@@ -14,7 +14,7 @@ export function ExpensesSummary() {
     // Подсчет выручки (операций)
     let totalRevenue = 0;
     const revenueByTeam = {
-      vady: 0,
+      voha: 0,
 
     };
     const revenueByType = {
@@ -27,7 +27,7 @@ export function ExpensesSummary() {
       totalRevenue += amount;
 
       // По команде
-      if (op.team === 'vady') revenueByTeam.vady += amount;
+      if (op.team === 'voha') revenueByTeam.voha += amount;
 
 
       // По типу операции
@@ -44,7 +44,7 @@ export function ExpensesSummary() {
     };
 
     const expensesByTeam = {
-      vady: 0,
+      voha: 0,
 
       none: 0,
     };
@@ -177,8 +177,8 @@ export function ExpensesSummary() {
           </CardHeader>
           <CardContent className="space-y-1">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Команда Вади:</span>
-              <span className="font-medium text-green-700">${summary.revenueByTeam.vady.toFixed(2)}</span>
+              <span className="text-muted-foreground">Команда Вохи:</span>
+              <span className="font-medium text-green-700">${summary.revenueByTeam.voha.toFixed(2)}</span>
             </div>
 
           </CardContent>
@@ -216,8 +216,8 @@ export function ExpensesSummary() {
           </CardHeader>
           <CardContent className="space-y-1">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Команда Вади:</span>
-              <span className="font-medium text-red-700">${summary.expensesByTeam.vady.toFixed(2)}</span>
+              <span className="text-muted-foreground">Команда Вохи:</span>
+              <span className="font-medium text-red-700">${summary.expensesByTeam.voha.toFixed(2)}</span>
             </div>
 
             <div className="flex justify-between text-sm">

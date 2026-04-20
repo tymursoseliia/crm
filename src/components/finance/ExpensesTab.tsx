@@ -28,7 +28,7 @@ export default function ExpensesTab() {
     date: new Date().toISOString().split('T')[0],
     category: expenseCategories[0]?.id || '',
     sumUsdt: '',
-    cashRegister: 'vady' as 'vady' | 'tech' | 'common',
+    cashRegister: 'voha' as 'voha' | 'tech' | 'common',
     issuedBy: 'Звук',
     recipient: '',
     comment: '',
@@ -39,7 +39,7 @@ export default function ExpensesTab() {
   const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
   const [filterType, setFilterType] = useState<ExpenseType | 'all'>('all');
   const [filterCategory, setFilterCategory] = useState<string>('all');
-  const [filterCashRegister, setFilterCashRegister] = useState<'all' | 'vady' | 'tech' | 'common'>('all');
+  const [filterCashRegister, setFilterCashRegister] = useState<'all' | 'voha' | 'tech' | 'common'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'date' | 'amount' | 'category'>('date');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
@@ -59,10 +59,10 @@ export default function ExpensesTab() {
   }, []);
 
   // Функция для определения кассы по расходу
-  const getCashRegisterFromExpense = (expense: Expense): 'vady' | 'tech' | 'common' | 'unknown' => {
+  const getCashRegisterFromExpense = (expense: Expense): 'voha' | 'tech' | 'common' | 'unknown' => {
     if (expense.type === 'tech') return 'tech';
     if (expense.type === 'common') return 'common';
-    if (expense.teamId === 'vady') return 'vady';
+    if (expense.teamId === 'voha') return 'voha';
     return 'unknown';
   };
 
@@ -188,14 +188,14 @@ export default function ExpensesTab() {
     setEditingExpense(expense);
 
     // Определяем cashRegister по типу расхода
-    let cashRegister: typeof formData.cashRegister = 'vady';
+    let cashRegister: typeof formData.cashRegister = 'voha';
 
     if (expense.type === 'tech') {
       cashRegister = 'tech';
     } else if (expense.type === 'common') {
       cashRegister = 'common';
     } else if (expense.teamId) {
-      cashRegister = expense.teamId as 'vady';
+      cashRegister = expense.teamId as 'voha';
     }
 
     setFormData({
@@ -246,7 +246,7 @@ export default function ExpensesTab() {
 
     // Определяем тип и команду на основе выбранной кассы
     let type: ExpenseType;
-    let teamId: 'vady' | undefined;
+    let teamId: 'voha' | undefined;
     let isForSpecialEmployee = false;
     let specialEmployeeId: string | undefined;
 
@@ -261,7 +261,7 @@ export default function ExpensesTab() {
     } else {
       // Касса команды - персональные расходы
       type = 'personal';
-      teamId = formData.cashRegister as 'vady';
+      teamId = formData.cashRegister as 'voha';
     }
 
     if (editingExpense) {
@@ -307,7 +307,7 @@ export default function ExpensesTab() {
       date: new Date().toISOString().split('T')[0],
       category: expenseCategories[0]?.id || '',
       sumUsdt: '',
-      cashRegister: 'vady',
+      cashRegister: 'voha',
       issuedBy: 'Звук',
       recipient: '',
       comment: '',
@@ -390,10 +390,10 @@ export default function ExpensesTab() {
     }
   };
 
-  const getCashRegisterDescription = (register: 'vady' | 'tech' | 'common') => {
+  const getCashRegisterDescription = (register: 'voha' | 'tech' | 'common') => {
     switch (register) {
-      case 'vady':
-        return '100% списывается с команды Вади';
+      case 'voha':
+        return '100% списывается с команды Вохи';
       case 'tech':
         return '100% технические расходы';
       case 'common':
@@ -536,7 +536,7 @@ export default function ExpensesTab() {
                 className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 <option value="all">Все кассы</option>
-                <option value="vady">Касса Вади</option>
+                <option value="voha">Касса Вохи</option>
                 <option value="tech">Касса Техников</option>
                 <option value="common">Общие расходы</option>
               </select>
@@ -762,10 +762,10 @@ export default function ExpensesTab() {
                         Выберите кассу *
                       </Label>
                       <div className="grid grid-cols-1 gap-2">
-                        {/* Касса Вади */}
+                        {/* Касса Вохи */}
                         <label
                           className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                            formData.cashRegister === 'vady'
+                            formData.cashRegister === 'voha'
                               ? 'border-blue-500 bg-blue-50'
                               : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50/50'
                           }`}
@@ -773,18 +773,18 @@ export default function ExpensesTab() {
                           <input
                             type="radio"
                             name="cashRegister"
-                            value="vady"
-                            checked={formData.cashRegister === 'vady'}
+                            value="voha"
+                            checked={formData.cashRegister === 'voha'}
                             onChange={(e) => setFormData({ ...formData, cashRegister: e.target.value as typeof formData.cashRegister })}
                             className="w-4 h-4 text-blue-600"
                           />
                           <div className="flex-1">
                             <div className="flex items-center gap-2">
                               <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                              <span className="font-medium text-gray-900">Касса Вади</span>
+                              <span className="font-medium text-gray-900">Касса Вохи</span>
                             </div>
                             <p className="text-xs text-blue-600 mt-0.5">
-                              100% списывается с команды Вади
+                              100% списывается с команды Вохи
                             </p>
                           </div>
                         </label>
@@ -940,7 +940,7 @@ export default function ExpensesTab() {
                             date: new Date().toISOString().split('T')[0],
                             category: expenseCategories[0]?.id || '',
                             sumUsdt: '',
-                            cashRegister: 'vady',
+                            cashRegister: 'voha',
                             issuedBy: 'Звук',
                             recipient: '',
                             comment: '',

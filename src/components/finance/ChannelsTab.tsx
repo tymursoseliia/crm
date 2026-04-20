@@ -45,8 +45,8 @@ export default function ChannelsTab() {
     date: new Date().toISOString().split('T')[0],
     category: '',
     sumUsdt: '',
-    cashRegister: 'vady' as 'vady' | 'tech' | 'common',
-    issuedBy: 'Вадим',
+    cashRegister: 'voha' as 'voha' | 'tech' | 'common',
+    issuedBy: 'Вохим',
     comment: '',
   });
 
@@ -108,7 +108,7 @@ export default function ChannelsTab() {
     }
 
     let type: ExpenseType;
-    let teamId: 'vady' | undefined;
+    let teamId: 'voha' | undefined;
 
     if (formData.cashRegister === 'tech') {
       type = 'tech';
@@ -118,7 +118,7 @@ export default function ChannelsTab() {
       teamId = undefined;
     } else {
       type = 'personal';
-      teamId = 'vady';
+      teamId = 'voha';
     }
 
     const categoryObj = expenseCategories.find(c => c.id === formData.category);
@@ -143,8 +143,8 @@ export default function ChannelsTab() {
       date: new Date().toISOString().split('T')[0],
       category: '',
       sumUsdt: '',
-      cashRegister: 'vady',
-      issuedBy: 'Вадим',
+      cashRegister: 'voha',
+      issuedBy: 'Вохим',
       comment: '',
     });
     setShowFullForm(false);
@@ -300,18 +300,18 @@ export default function ChannelsTab() {
                       <Label className="text-sm font-semibold text-gray-700">С какой кассы списать? *</Label>
                       <div className="grid grid-cols-1 gap-2">
                         <label className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                          formData.cashRegister === 'vady' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'
+                          formData.cashRegister === 'voha' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'
                         }`}>
                           <input
                             type="radio"
                             name="cashRegister"
-                            value="vady"
-                            checked={formData.cashRegister === 'vady'}
+                            value="voha"
+                            checked={formData.cashRegister === 'voha'}
                             onChange={(e) => setFormData({ ...formData, cashRegister: e.target.value as any })}
                             className="w-4 h-4"
                           />
                           <div>
-                            <div className="font-medium">Персональная (Команда Вади)</div>
+                            <div className="font-medium">Персональная (Команда Вохи)</div>
                           </div>
                         </label>
                         <label className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${

@@ -41,27 +41,27 @@ export default function EmployeesTab() {
   const updateTeamleadsData = async () => {
     setIsUpdatingTeamleads(true);
     try {
-      const vohaOps = operations.filter(op => op.managerId === 'vady');
+      const vohaOps = operations.filter(op => op.managerId === 'voha');
 
       if (vohaOps.length > 0) {
-        const message = `⚠️ ВНИМАНИЕ!\n\nНайдены операции у Вади:\n` +
-          `- Вадя: ${vohaOps.length} операций\n\n` +
+        const message = `⚠️ ВНИМАНИЕ!\n\nНайдены операции у Вохи:\n` +
+          `- Воха: ${vohaOps.length} операций\n\n` +
           `Он НЕ должен иметь своих операций!\n\n` +
           `❗ НУЖНО:\n` +
           `1. Зайти на страницу "Операции"\n` +
-          `2. Удалить или переназначить все операции где менеджер = Вадя\n` +
+          `2. Удалить или переназначить все операции где менеджер = Воха\n` +
           `3. После этого вернуться сюда и снова нажать кнопку\n\n` +
           `Или удалить через Supabase SQL Editor:\n` +
-          `DELETE FROM operations WHERE manager_id = 'vady';`;
+          `DELETE FROM operations WHERE manager_id = 'voha';`;
         alert(message);
         setIsUpdatingTeamleads(false);
         return;
       }
 
-      const vady = employees.find(e => e.id === 'vady');
-      if (vady) {
+      const voha = employees.find(e => e.id === 'voha');
+      if (voha) {
         await updateEmployee({
-          ...vady,
+          ...voha,
           role: 'manager',
           salary: 350,
           percentProfit: 0,
@@ -71,9 +71,9 @@ export default function EmployeesTab() {
       }
 
       await reloadData();
-      alert('✅ Данные Вади обновлены!\n\nВадя:\n- Минималка: $350\n- % от прибыли: 0\n- Растаможка: 15%\n- Добив: 10%');
+      alert('✅ Данные Вохи обновлены!\n\nВоха:\n- Минималка: $350\n- % от прибыли: 0\n- Растаможка: 15%\n- Добив: 10%');
     } catch (error) {
-      console.error('Ошибка обновления Вади:', error);
+      console.error('Ошибка обновления Вохи:', error);
       alert('❌ Ошибка обновления данных');
     } finally {
       setIsUpdatingTeamleads(false);
@@ -88,7 +88,7 @@ export default function EmployeesTab() {
     );
   }
 
-  const vadyTeam = employees.filter(emp => emp.team === 'vady');
+  const vohaTeam = employees.filter(emp => emp.team === 'voha');
   const closers = employees.filter(emp => emp.role === 'closer');
   const itDepartment = employees.filter(emp => emp.role === 'it');
   const specialRoles = employees.filter(emp => emp.role === 'special');
@@ -288,7 +288,7 @@ export default function EmployeesTab() {
                   size="sm"
                   disabled={isUpdatingTeamleads}
                   className="flex items-center gap-2 text-white bg-purple-600 hover:bg-purple-700 border-purple-600 disabled:opacity-50"
-                  title="Обновить данные Вади (350 USDT, без % от прибыли)"
+                  title="Обновить данные Вохи (350 USDT, без % от прибыли)"
                 >
                   {isUpdatingTeamleads ? (
                     <>
@@ -322,8 +322,8 @@ export default function EmployeesTab() {
       </div>
 
       <TeamTable
-        title="Команда Вади"
-        teamEmployees={vadyTeam}
+        title="Команда Вохи"
+        teamEmployees={vohaTeam}
         icon={<Users className="w-5 h-5 text-blue-600" />}
         colorClass="border-t-blue-500"
       />

@@ -58,8 +58,8 @@ export default function ReportsTab() {
     currentPeriod.endDate
   ), [expenses, currentPeriod.startDate, currentPeriod.endDate]);
 
-  const vadyStats = useMemo(() => calculateTeamStats(
-    'vady',
+  const vohaStats = useMemo(() => calculateTeamStats(
+    'voha',
     periodOperations,
     periodExpenses,
     employees,
@@ -69,13 +69,13 @@ export default function ReportsTab() {
   ), [periodOperations, periodExpenses, employees, currentPeriod.id, currentPeriod.calculation_version]);
 
   const companyTotals = useMemo(() => calculateCompanyTotals(
-    vadyStats,
+    vohaStats,
     employees,
     periodOperations,
     periodExpenses,
     initialSettings,
     currentPeriod.calculation_version || 'v1'
-  ), [vadyStats, employees, periodOperations, periodExpenses, currentPeriod.calculation_version]);
+  ), [vohaStats, employees, periodOperations, periodExpenses, currentPeriod.calculation_version]);
 
   const topManagers = useMemo(() => {
     const managers = employees.filter(e => e.role === 'manager' && !e.isSpecial);
@@ -100,30 +100,30 @@ export default function ReportsTab() {
   }, [employees, periodOperations, periodExpenses]);
 
   const teamEfficiency = useMemo(() => {
-    const vohaManagers = employees.filter(e => e.team === 'vady' && e.role === 'manager').length;
+    const vohaManagers = employees.filter(e => e.team === 'voha' && e.role === 'manager').length;
 
     return [
       {
-        team: 'Команда Вади',
-        revenuePerManager: vohaManagers > 0 ? vadyStats.totalRevenue / vohaManagers : 0,
-        profitMargin: vadyStats.totalRevenue > 0 ? (vadyStats.netProfit / vadyStats.totalRevenue) * 100 : 0,
-        operations: vadyStats.operationsCount,
+        team: 'Команда Вохи',
+        revenuePerManager: vohaManagers > 0 ? vohaStats.totalRevenue / vohaManagers : 0,
+        profitMargin: vohaStats.totalRevenue > 0 ? (vohaStats.netProfit / vohaStats.totalRevenue) * 100 : 0,
+        operations: vohaStats.operationsCount,
         managers: vohaManagers,
-        totalRevenue: vadyStats.totalRevenue
+        totalRevenue: vohaStats.totalRevenue
       }
     ];
-  }, [employees, vadyStats]);
+  }, [employees, vohaStats]);
 
   const expenseStructure = useMemo(() => {
     return [
-      { name: 'ЗП команд', value: vadyStats.teamSalaries },
+      { name: 'ЗП команд', value: vohaStats.teamSalaries },
       { name: 'ЗП IT отдела', value: employees.filter(e => e.role === 'it').reduce((sum, e) => sum + (e.fixedPay || e.salary), 0) },
-      { name: 'Персональные', value: vadyStats.personalExpenses },
-      { name: 'Общие', value: vadyStats.commonExpenses },
-      { name: 'Технические', value: vadyStats.techExpenses },
-      { name: 'Постоянные', value: vadyStats.fixedExpenses }
+      { name: 'Персональные', value: vohaStats.personalExpenses },
+      { name: 'Общие', value: vohaStats.commonExpenses },
+      { name: 'Технические', value: vohaStats.techExpenses },
+      { name: 'Постоянные', value: vohaStats.fixedExpenses }
     ].filter(item => item.value > 0);
-  }, [vadyStats, employees]);
+  }, [vohaStats, employees]);
 
   const conversionStats = useMemo(() => {
     const rastamozhka = periodOperations.filter(op => op.type === 'растаможка').length;
@@ -216,12 +216,12 @@ export default function ReportsTab() {
             <CardContent>
               <div className="grid grid-cols-1 gap-4">
                 <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg border border-purple-200">
-                  <p className="text-sm text-gray-600 mb-2">Команда Вади</p>
+                  <p className="text-sm text-gray-600 mb-2">Команда Вохи</p>
                   <div className="flex items-center justify-between">
                     <div className="text-3xl font-bold text-purple-700">
-                      {(vadyStats.totalRevenue > 0 ? (vadyStats.netProfit / vadyStats.totalRevenue) * 100 : 0).toFixed(1)}%
+                      {(vohaStats.totalRevenue > 0 ? (vohaStats.netProfit / vohaStats.totalRevenue) * 100 : 0).toFixed(1)}%
                     </div>
-                    {vadyStats.netProfit > 0 ? (
+                    {vohaStats.netProfit > 0 ? (
                       <TrendingUp className="w-8 h-8 text-green-600" />
                     ) : (
                       <TrendingDown className="w-8 h-8 text-red-600" />
@@ -229,7 +229,7 @@ export default function ReportsTab() {
                   </div>
                   <div className="mt-2 pt-2 border-t border-gray-200">
                     <p className="text-xs text-gray-600">Прибыль</p>
-                    <p className="text-base font-bold text-green-700">${formatUSDT(vadyStats.netProfit)}</p>
+                    <p className="text-base font-bold text-green-700">${formatUSDT(vohaStats.netProfit)}</p>
                   </div>
                 </div>
               </div>
@@ -304,7 +304,7 @@ export default function ReportsTab() {
                           <div className="flex items-center gap-2">
                             <p className="font-semibold text-gray-900">{manager.name}</p>
                             <Badge variant="default">
-                              Вадя
+                              Воха
                             </Badge>
                             {index < 3 && (
                               <Award className={`w-5 h-5 ${
@@ -360,7 +360,7 @@ export default function ReportsTab() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
                         <p className="font-semibold text-gray-900">{manager.name}</p>
-                        <Badge variant="default">Вадя</Badge>
+                        <Badge variant="default">Воха</Badge>
                         {index < 3 && (
                           <Award className={`w-5 h-5 ${
                             index === 0 ? 'text-yellow-500' :
@@ -524,21 +524,21 @@ export default function ReportsTab() {
                   <div className="space-y-6">
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-semibold text-purple-700">Команда Вади</span>
+                        <span className="font-semibold text-purple-700">Команда Вохи</span>
                         <span className="text-2xl font-bold text-purple-700">
-                          ${formatUSDT(vadyStats.operationsCount > 0 ? vadyStats.totalRevenue / vadyStats.operationsCount : 0)}
+                          ${formatUSDT(vohaStats.operationsCount > 0 ? vohaStats.totalRevenue / vohaStats.operationsCount : 0)}
                         </span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-3">
                         <div
                           className="bg-gradient-to-r from-purple-500 to-purple-600 h-3 rounded-full transition-all"
                           style={{
-                            width: `${Math.min(100, (vadyStats.operationsCount > 0 ? (vadyStats.totalRevenue / vadyStats.operationsCount) / 100 : 0))}%`
+                            width: `${Math.min(100, (vohaStats.operationsCount > 0 ? (vohaStats.totalRevenue / vohaStats.operationsCount) / 100 : 0))}%`
                           }}
                         />
                       </div>
                       <p className="text-sm text-gray-600 mt-1">
-                        {vadyStats.operationsCount} операций
+                        {vohaStats.operationsCount} операций
                       </p>
                     </div>
 
@@ -570,21 +570,21 @@ export default function ReportsTab() {
                 <div className="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
                   <h3 className="font-semibold text-purple-900 mb-4 flex items-center gap-2">
                     <Users className="w-5 h-5" />
-                    Команда Вади
+                    Команда Вохи
                   </h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-3 bg-white rounded-lg">
                       <p className="text-sm text-gray-600">Выручка</p>
-                      <p className="text-2xl font-bold text-purple-700">${formatUSDT(vadyStats.totalRevenue)}</p>
+                      <p className="text-2xl font-bold text-purple-700">${formatUSDT(vohaStats.totalRevenue)}</p>
                     </div>
                     <div className="p-3 bg-white rounded-lg">
                       <p className="text-sm text-gray-600">Операций</p>
-                      <p className="text-2xl font-bold text-purple-700">{vadyStats.operationsCount}</p>
+                      <p className="text-2xl font-bold text-purple-700">{vohaStats.operationsCount}</p>
                     </div>
                     <div className="p-3 bg-white rounded-lg">
                       <p className="text-sm text-gray-600">Средний чек</p>
                       <p className="text-2xl font-bold text-purple-700">
-                        ${formatUSDT(vadyStats.operationsCount > 0 ? vadyStats.totalRevenue / vadyStats.operationsCount : 0)}
+                        ${formatUSDT(vohaStats.operationsCount > 0 ? vohaStats.totalRevenue / vohaStats.operationsCount : 0)}
                       </p>
                     </div>
                     <div className="p-3 bg-white rounded-lg">
@@ -600,7 +600,7 @@ export default function ReportsTab() {
                   <h3 className="font-semibold text-gray-900 mb-4">📊 Сравнение</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Выручка на менеджера (Вадя):</span>
+                      <span className="text-gray-700">Выручка на менеджера (Воха):</span>
                       <span className="font-bold text-purple-700">
                         ${formatUSDT(teamEfficiency[0].revenuePerManager)}
                       </span>
@@ -609,7 +609,7 @@ export default function ReportsTab() {
                       <div className="flex justify-between items-center">
                         <span className="text-gray-700 font-semibold">Общая выручка:</span>
                         <span className="text-2xl font-bold text-green-700">
-                          ${formatUSDT(vadyStats.totalRevenue)}
+                          ${formatUSDT(vohaStats.totalRevenue)}
                         </span>
                       </div>
                     </div>
@@ -663,7 +663,7 @@ export default function ReportsTab() {
                   </div>
                   <p className="text-2xl font-bold text-gray-900 mb-2">{topManagers[0].name}</p>
                   <Badge variant="default" className="mb-3">
-                    Команда Вади
+                    Команда Вохи
                   </Badge>
                   <div className="grid grid-cols-2 gap-3 mt-4">
                     <div className="p-2 bg-white/80 backdrop-blur-sm rounded">
@@ -712,7 +712,7 @@ export default function ReportsTab() {
           </Card>
         </div>
 
-        {(vadyStats.netProfit < 0 || conversionStats.conversionRate < 50) && (
+        {(vohaStats.netProfit < 0 || conversionStats.conversionRate < 50) && (
           <Card className="border-0 shadow-xl bg-gradient-to-br from-red-50 to-orange-50 overflow-hidden relative">
             <div className="absolute top-0 right-0 w-40 h-40 bg-red-300 opacity-10 rounded-full -mr-20 -mt-20" />
             <CardHeader>
@@ -723,16 +723,16 @@ export default function ReportsTab() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {vadyStats.netProfit < 0 && (
+                {vohaStats.netProfit < 0 && (
                   <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg border-l-4 border-red-500 shadow-md hover:shadow-lg transition-shadow">
                     <div className="flex items-start gap-3">
                       <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <TrendingDown className="w-5 h-5 text-red-600" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-semibold text-red-900 text-lg">Команда Вади в убытке</p>
+                        <p className="font-semibold text-red-900 text-lg">Команда Вохи в убытке</p>
                         <p className="text-sm text-gray-700 mt-1">
-                          Убыток: <span className="font-bold text-red-700">${formatUSDT(Math.abs(vadyStats.netProfit))}</span>
+                          Убыток: <span className="font-bold text-red-700">${formatUSDT(Math.abs(vohaStats.netProfit))}</span>
                         </p>
                         <p className="text-xs text-gray-600 mt-2">
                           💡 Рекомендация: Пересмотреть структуру расходов или увеличить среднюю выручку с операции

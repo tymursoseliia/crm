@@ -41,8 +41,8 @@ export default function TelegramAnalyticsTab() {
   const [currentPeriod, setCurrentPeriod] = useState<TelegramPeriod | null>(null);
   const [isCreatingPeriod, setIsCreatingPeriod] = useState(false);
 
-  // Выбранная команда всегда vady
-  const selectedTeam = 'vady';
+  // Выбранная команда всегда voha
+  const selectedTeam = 'voha';
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -302,8 +302,8 @@ export default function TelegramAnalyticsTab() {
               history[date] = JSON.parse(saved);
             }
           }
-          // Старый формат (только для Вади): telegram_leads_{date}
-          else if (selectedTeam === 'vady' && key?.startsWith('telegram_leads_')) {
+          // Старый формат (только для Вохи): telegram_leads_{date}
+          else if (selectedTeam === 'voha' && key?.startsWith('telegram_leads_')) {
             // Проверяем что это не новый формат
             const parts = key.split('_');
             if (parts.length === 3) { // telegram_leads_{date}
@@ -314,7 +314,7 @@ export default function TelegramAnalyticsTab() {
                 // Добавляем team_id к старым данным
                 history[date] = data.map((item: DailyLeads) => ({
                   ...item,
-                  teamId: 'vady'
+                  teamId: 'voha'
                 }));
               }
             }
@@ -326,7 +326,7 @@ export default function TelegramAnalyticsTab() {
       }
 
       // Загружаем данные для выбранной команды
-      // Для команды Вади также загружаем старые данные без team_id
+      // Для команды Вохи также загружаем старые данные без team_id
       let query = supabase
         .from('telegram_daily_leads')
         .select('*')
@@ -334,8 +334,8 @@ export default function TelegramAnalyticsTab() {
         .lte('date', currentPeriod.end_date)
         .order('date', { ascending: false });
 
-      // Для Вади загружаем данные с team_id='vady' ИЛИ без team_id (старые данные)
-      query = query.or(`team_id.eq.vady,team_id.is.null`);
+      // Для Вохи загружаем данные с team_id='voha' ИЛИ без team_id (старые данные)
+      query = query.or(`team_id.eq.voha,team_id.is.null`);
 
       const { data, error } = await query;
 
@@ -547,7 +547,7 @@ export default function TelegramAnalyticsTab() {
             <div>
               <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
                 <MessageSquare className="w-6 h-6 text-purple-600" />
-                Telegram лиды - Команда Вади
+                Telegram лиды - Команда Вохи
               </h2>
               <p className="text-sm text-gray-600 mt-1">
                 Табличный учет новых лидов по дням

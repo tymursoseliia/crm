@@ -96,7 +96,7 @@ export default function LoginScreen() {
             {activeTab === 'employee' ? 'Вход для сотрудников' : 'Панель управления'}
           </CardTitle>
           <CardDescription className="text-base mt-2">
-            {activeTab === 'employee' ? 'Укажите свой уникальный пароль доступа' : 'Войдите под мастер-паролем Вадима'}
+            {activeTab === 'employee' ? 'Укажите свой уникальный пароль доступа' : 'Войдите под мастер-паролем Вохима'}
           </CardDescription>
         </CardHeader>
 

@@ -30,8 +30,8 @@ export default function SalaryCalculationTab() {
     currentPeriod.endDate
   ), [expenses, currentPeriod.startDate, currentPeriod.endDate]);
 
-  const vadyStats = useMemo(() => calculateTeamStats(
-    'vady',
+  const vohaStats = useMemo(() => calculateTeamStats(
+    'voha',
     periodOperations,
     periodExpenses,
     employees,
@@ -41,22 +41,22 @@ export default function SalaryCalculationTab() {
   ), [periodOperations, periodExpenses, employees, currentPeriod]);
 
   const companyTotals = useMemo(() => calculateCompanyTotals(
-    vadyStats,
+    vohaStats,
     employees,
     periodOperations,
     periodExpenses,
     initialSettings,
     currentPeriod.isClosed ? (currentPeriod.calculation_version || 'v1') : 'v2'
-  ), [vadyStats, employees, periodOperations, periodExpenses, currentPeriod]);
+  ), [vohaStats, employees, periodOperations, periodExpenses, currentPeriod]);
 
   const groupedEmployees = useMemo(() => {
-    const vadyTeam = employees.filter(e => e.team === 'vady' && e.role === 'manager');
+    const vohaTeam = employees.filter(e => e.team === 'voha' && e.role === 'manager');
     const closers = employees.filter(e => e.role === 'closer');
     const itTeam = employees.filter(e => e.role === 'it');
     const specialTeam = employees.filter(e => e.role === 'special');
 
     return {
-      vadyTeam,
+      vohaTeam,
       closers,
       itTeam,
       specialTeam,
@@ -194,19 +194,19 @@ export default function SalaryCalculationTab() {
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-sm">
                   <Users className="w-4 h-4 text-blue-600" />
-                  Команда Вади
+                  Команда Вохи
                 </CardTitle>
-                <Badge className="bg-blue-500 text-xs">{groupedEmployees.vadyTeam.length}</Badge>
+                <Badge className="bg-blue-500 text-xs">{groupedEmployees.vohaTeam.length}</Badge>
               </div>
             </CardHeader>
             <CardContent className="pt-2 pb-2 px-4">
               <div className="space-y-1">
-                {groupedEmployees.vadyTeam.map(emp => renderEmployee(emp, salaries[emp.id] || { salary: 0 }, 'Менеджер'))}
+                {groupedEmployees.vohaTeam.map(emp => renderEmployee(emp, salaries[emp.id] || { salary: 0 }, 'Менеджер'))}
               </div>
               <div className="mt-2 pt-2 border-t border-gray-200">
                 <div className="flex justify-between text-sm font-semibold">
                   <span className="text-gray-600">Итого команда:</span>
-                  <span className="text-blue-600">${formatUSDT(groupedEmployees.vadyTeam.reduce((sum, e) => sum + (salaries[e.id]?.salary || 0), 0))}</span>
+                  <span className="text-blue-600">${formatUSDT(groupedEmployees.vohaTeam.reduce((sum, e) => sum + (salaries[e.id]?.salary || 0), 0))}</span>
                 </div>
               </div>
             </CardContent>

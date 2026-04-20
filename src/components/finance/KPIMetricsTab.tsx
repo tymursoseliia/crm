@@ -48,8 +48,8 @@ export default function KPIMetricsTab() {
     currentPeriod.endDate
   ), [expenses, currentPeriod.startDate, currentPeriod.endDate]);
 
-  const vadyStats = useMemo(() => calculateTeamStats(
-    'vady',
+  const vohaStats = useMemo(() => calculateTeamStats(
+    'voha',
     periodOperations,
     periodExpenses,
     employees,
@@ -59,13 +59,13 @@ export default function KPIMetricsTab() {
   ), [periodOperations, periodExpenses, employees, currentPeriod.id, currentPeriod.calculation_version]);
 
   const companyTotals = useMemo(() => calculateCompanyTotals(
-    vadyStats,
+    vohaStats,
     employees,
     periodOperations,
     periodExpenses,
     initialSettings,
     currentPeriod.calculation_version || 'v1'
-  ), [vadyStats, employees, periodOperations, periodExpenses, currentPeriod.calculation_version]);
+  ), [vohaStats, employees, periodOperations, periodExpenses, currentPeriod.calculation_version]);
 
   const dailyMetrics = useMemo(() => {
     const today = new Date();
@@ -100,7 +100,7 @@ export default function KPIMetricsTab() {
   }, [periodOperations, currentPeriod, companyTotals]);
 
   const weeklyReview = useMemo(() => {
-    const vohaManagers = employees.filter(e => e.team === 'vady' && e.role === 'manager');
+    const vohaManagers = employees.filter(e => e.team === 'voha' && e.role === 'manager');
     const vohaTarget = 200000;
     const vohaManagerTarget = 20000;
 
@@ -119,14 +119,14 @@ export default function KPIMetricsTab() {
     }).sort((a, b) => b.revenue - a.revenue);
 
     return {
-      vady: {
+      voha: {
         performers: vohaPerformers,
         target: vohaTarget,
-        actual: vadyStats.totalRevenue,
-        teamCompletion: vohaTarget > 0 ? (vadyStats.totalRevenue / vohaTarget) * 100 : 0
+        actual: vohaStats.totalRevenue,
+        teamCompletion: vohaTarget > 0 ? (vohaStats.totalRevenue / vohaTarget) * 100 : 0
       }
     };
-  }, [employees, periodOperations, vadyStats]);
+  }, [employees, periodOperations, vohaStats]);
 
   const individualKPIs = useMemo(() => {
     const managers = employees.filter(e => e.role === 'manager' && !e.isSpecial);
@@ -332,7 +332,7 @@ export default function KPIMetricsTab() {
             <Calendar className="w-5 h-5 text-indigo-600" />
             <h2 className="text-xl font-bold text-gray-900">Еженедельный Review по командам</h2>
             <Badge variant="outline" className="ml-2 text-purple-700 border-purple-300">
-              Вадя: $200k
+              Воха: $200k
             </Badge>
             <Badge variant="outline" className="ml-2 text-green-700 border-green-300">
               На менеджера: $20k
@@ -345,10 +345,10 @@ export default function KPIMetricsTab() {
                 <CardTitle className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Users className="w-5 h-5 text-purple-600" />
-                    <span>Команда Вади</span>
+                    <span>Команда Вохи</span>
                   </div>
-                  <Badge variant={weeklyReview.vady.teamCompletion >= 100 ? 'default' : 'secondary'}>
-                    {weeklyReview.vady.teamCompletion.toFixed(0)}% плана
+                  <Badge variant={weeklyReview.voha.teamCompletion >= 100 ? 'default' : 'secondary'}>
+                    {weeklyReview.voha.teamCompletion.toFixed(0)}% плана
                   </Badge>
                 </CardTitle>
               </CardHeader>
@@ -356,17 +356,17 @@ export default function KPIMetricsTab() {
                 <div className="mb-4 p-3 bg-purple-50 rounded-lg">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm text-gray-600">Цель команды:</span>
-                    <span className="font-bold text-purple-700">${formatUSDT(weeklyReview.vady.target)}</span>
+                    <span className="font-bold text-purple-700">${formatUSDT(weeklyReview.voha.target)}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Факт:</span>
-                    <span className="font-bold text-purple-900">${formatUSDT(weeklyReview.vady.actual)}</span>
+                    <span className="font-bold text-purple-900">${formatUSDT(weeklyReview.voha.actual)}</span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <p className="text-sm font-semibold text-gray-700 mb-3">Результаты менеджеров:</p>
-                  {weeklyReview.vady.performers.map((performer, index) => (
+                  {weeklyReview.voha.performers.map((performer, index) => (
                     <div
                       key={index}
                       className={`p-3 rounded-lg border-2 ${
@@ -427,7 +427,7 @@ export default function KPIMetricsTab() {
                       <div>
                         <h3 className="text-lg font-bold text-gray-900">{kpi.name}</h3>
                         <Badge variant="default">
-                          Команда Вади
+                          Команда Вохи
                         </Badge>
                       </div>
                     </div>

@@ -217,7 +217,7 @@ export const calculateTeamStats = (
 };
 
 export const calculateCompanyTotals = (
-  vadyStats: TeamStats,
+  vohaStats: TeamStats,
   employees: Employee[],
   operations: Operation[],
   expenses: Expense[],
@@ -241,17 +241,17 @@ export const calculateCompanyTotals = (
   }, 0);
 
   const expensesWithoutBonuses =
-    vadyStats.totalExpenses +
-    vadyStats.teamleadSalary +
+    vohaStats.totalExpenses +
+    vohaStats.teamleadSalary +
     closersSalaries;
 
   const profitBeforeBonuses = totalRevenue - expensesWithoutBonuses;
   const netProfit = profitBeforeBonuses;
   
   const totalSalaries =
-    vadyStats.teamSalaries +
+    vohaStats.teamSalaries +
     itSalaries +
-    vadyStats.teamleadSalary +
+    vohaStats.teamleadSalary +
     closersSalaries;
 
   const directExpensesOnly = expenses.reduce((sum, exp) => sum + exp.sumUsdt, 0);

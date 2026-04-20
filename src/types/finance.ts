@@ -1,6 +1,6 @@
 // Типы для финансовой CRM системы
 
-export type TeamName = 'vady';
+export type TeamName = 'voha';
 export type EmployeeRole = 'manager' | 'closer' | 'teamlead' | 'it' | 'special';
 export type OperationType = 'растаможка' | 'добив';
 export type ExpenseType = 'personal' | 'tech' | 'fixed' | 'common';

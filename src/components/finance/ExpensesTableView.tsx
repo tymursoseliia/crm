@@ -127,8 +127,8 @@ export default function ExpensesTableView({
                     <span className="text-gray-700">🔧 Техники (100%)</span>
                   ) : exp.type === 'common' ? (
                     <span className="text-orange-700">🏢 Общие (100%)</span>
-                  ) : exp.teamId === 'vady' ? (
-                    <span className="text-blue-700">💙 Вадя (100%)</span>
+                  ) : exp.teamId === 'voha' ? (
+                    <span className="text-blue-700">💙 Воха (100%)</span>
                   ) : (
                     <span className="text-gray-500">-</span>
                   )}

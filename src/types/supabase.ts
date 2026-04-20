@@ -7,7 +7,7 @@ export type Database = {
           id: string;
           name: string;
           role: 'manager' | 'closer' | 'teamlead' | 'it' | 'special';
-          team: 'vady' | null;
+          team: 'voha' | null;
           salary: number;
           percent_rastamozhka: number;
           percent_dobiv: number;
@@ -46,7 +46,7 @@ export type Database = {
           usdt_after_commission: number;
           manager_earning: number;
           closer_earning: number | null;
-          team: 'vady';
+          team: 'voha';
           created_at: string;
         };
         Insert: Omit<Database['public']['Tables']['operations']['Row'], 'created_at'>;
@@ -69,7 +69,7 @@ export type Database = {
           category: string;
           sum_usdt: number;
           type: 'personal' | 'tech' | 'fixed' | 'common';
-          team_id: 'vady' | null;
+          team_id: 'voha' | null;
           employee_id: string | null;
           issued_by: string;
           recipient: string;

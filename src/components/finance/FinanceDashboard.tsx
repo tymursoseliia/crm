@@ -57,8 +57,8 @@ export default function FinanceDashboard() {
   );
 
   // Рассчитываем статистику команд
-  const vadyStats = calculateTeamStats(
-    'vady',
+  const vohaStats = calculateTeamStats(
+    'voha',
     periodOperations,
     periodExpenses,
     employees,
@@ -68,7 +68,7 @@ export default function FinanceDashboard() {
   );
 
   const companyTotals = calculateCompanyTotals(
-    vadyStats,
+    vohaStats,
     employees,
     periodOperations,
     periodExpenses,
@@ -92,23 +92,23 @@ export default function FinanceDashboard() {
   };
 
   const revenueData = [
-    { name: 'Команда Вади', value: vadyStats.totalRevenue },
+    { name: 'Команда Вохи', value: vohaStats.totalRevenue },
   ];
 
   const expensesData = [
-    { name: 'Команда Вади', value: vadyStats.totalExpenses },
+    { name: 'Команда Вохи', value: vohaStats.totalExpenses },
   ];
 
-  const dailyData: { [key: string]: { date: string; vady: number } } = {};
+  const dailyData: { [key: string]: { date: string; voha: number } } = {};
 
   periodOperations.forEach(op => {
     const date = op.date.split('T')[0];
     if (!dailyData[date]) {
-      dailyData[date] = { date, vady: 0 };
+      dailyData[date] = { date, voha: 0 };
     }
 
-    if (op.team === 'vady') {
-      dailyData[date].vady += op.usdtAfterCommission;
+    if (op.team === 'voha') {
+      dailyData[date].voha += op.usdtAfterCommission;
     }
   });
 
@@ -212,16 +212,16 @@ export default function FinanceDashboard() {
                 <div className="p-4 border-2 border-purple-200 rounded-lg bg-purple-50">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-4 h-4 rounded-full bg-purple-600" />
-                    <h3 className="font-semibold text-lg text-purple-900">Команда Вади</h3>
+                    <h3 className="font-semibold text-lg text-purple-900">Команда Вохи</h3>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Операций:</span>
-                      <span className="font-semibold">{vadyStats.operationsCount}</span>
+                      <span className="font-semibold">{vohaStats.operationsCount}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-700 font-medium">Выручка:</span>
-                      <span className="text-xl font-bold text-purple-700">${formatUSDT(vadyStats.totalRevenue)}</span>
+                      <span className="text-xl font-bold text-purple-700">${formatUSDT(vohaStats.totalRevenue)}</span>
                     </div>
                   </div>
                 </div>
@@ -322,7 +322,7 @@ export default function FinanceDashboard() {
                               </Badge>
                               {expense.teamId && (
                                 <Badge variant="outline">
-                                  {expense.teamId === 'vady' ? 'Вадя' : 'Офис'}
+                                  {expense.teamId === 'voha' ? 'Воха' : 'Офис'}
                                 </Badge>
                               )}
                             </div>
@@ -472,7 +472,7 @@ export default function FinanceDashboard() {
                     />
                     <Line
                       type="monotone"
-                      dataKey="vady"
+                      dataKey="voha"
                       stroke="#8B5CF6"
                       strokeWidth={4}
                       dot={{
@@ -489,7 +489,7 @@ export default function FinanceDashboard() {
                         strokeWidth: 3,
                         filter: 'drop-shadow(0 4px 8px rgba(139, 92, 246, 0.6))'
                       }}
-                      name="Команда Вади"
+                      name="Команда Вохи"
                       fill="url(#colorVoha)"
                       animationDuration={1500}
                       animationBegin={0}
@@ -500,8 +500,8 @@ export default function FinanceDashboard() {
                   <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border border-purple-200">
                     <div className="w-4 h-4 rounded-full bg-purple-600 shadow-lg" />
                     <div>
-                      <p className="text-xs text-purple-600 font-medium">Команда Вади</p>
-                      <p className="text-lg font-bold text-purple-900">${formatUSDT(vadyStats.totalRevenue)}</p>
+                      <p className="text-xs text-purple-600 font-medium">Команда Вохи</p>
+                      <p className="text-lg font-bold text-purple-900">${formatUSDT(vohaStats.totalRevenue)}</p>
                     </div>
                   </div>
                 </div>
@@ -563,7 +563,7 @@ export default function FinanceDashboard() {
                     <div className="p-2 bg-blue-500 text-white rounded-lg">
                       <Users className="w-5 h-5" />
                     </div>
-                    Команда Вади
+                    Команда Вохи
                   </div>
                   <Eye className="w-5 h-5 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </CardTitle>
@@ -572,17 +572,17 @@ export default function FinanceDashboard() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-blue-50 rounded-lg">
                     <p className="text-sm text-gray-600 mb-1">Выручка</p>
-                    <p className="text-2xl font-bold text-blue-600">${formatUSDT(vadyStats.totalRevenue)}</p>
+                    <p className="text-2xl font-bold text-blue-600">${formatUSDT(vohaStats.totalRevenue)}</p>
                   </div>
                   <div className="p-4 bg-red-50 rounded-lg">
                     <p className="text-sm text-gray-600 mb-1">Расходы</p>
-                    <p className="text-2xl font-bold text-red-600">${formatUSDT(vadyStats.totalExpenses)}</p>
+                    <p className="text-2xl font-bold text-red-600">${formatUSDT(vohaStats.totalExpenses)}</p>
                   </div>
                 </div>
-                <div className={`p-4 rounded-lg ${vadyStats.netProfit >= 0 ? 'bg-emerald-50' : 'bg-red-50'}`}>
+                <div className={`p-4 rounded-lg ${vohaStats.netProfit >= 0 ? 'bg-emerald-50' : 'bg-red-50'}`}>
                   <p className="text-sm text-gray-600 mb-1">Чистая прибыль</p>
-                  <p className={`text-3xl font-bold ${vadyStats.netProfit >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
-                    ${formatUSDT(vadyStats.netProfit)}
+                  <p className={`text-3xl font-bold ${vohaStats.netProfit >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
+                    ${formatUSDT(vohaStats.netProfit)}
                   </p>
                 </div>
                 <p className="text-xs text-center text-gray-500">Нажмите для детализации</p>
@@ -592,7 +592,7 @@ export default function FinanceDashboard() {
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold text-blue-700">
-                Детальный расчет прибыли команды Вади
+                Детальный расчет прибыли команды Вохи
               </DialogTitle>
               <DialogDescription>
                 Полная разбивка за период {currentPeriod.startDate} — {currentPeriod.endDate}
@@ -603,8 +603,8 @@ export default function FinanceDashboard() {
               <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
                 <h3 className="font-semibold text-blue-900 mb-2">💰 Выручка</h3>
                 <div className="flex justify-between items-center">
-                  <span>Операций: {vadyStats.operationsCount}</span>
-                  <span className="text-2xl font-bold text-blue-700">${formatUSDT(vadyStats.totalRevenue)}</span>
+                  <span>Операций: {vohaStats.operationsCount}</span>
+                  <span className="text-2xl font-bold text-blue-700">${formatUSDT(vohaStats.totalRevenue)}</span>
                 </div>
               </div>
 
@@ -613,29 +613,29 @@ export default function FinanceDashboard() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between p-2 bg-white rounded">
                     <span className="text-gray-700">Персональные расходы команды:</span>
-                    <span className="font-semibold">${formatUSDT(vadyStats.personalExpenses)}</span>
+                    <span className="font-semibold">${formatUSDT(vohaStats.personalExpenses)}</span>
                   </div>
                   <div className="flex justify-between p-2 bg-white rounded">
                     <span className="text-gray-700">Технические расходы (25%):</span>
-                    <span className="font-semibold">${formatUSDT(vadyStats.techExpenses)}</span>
+                    <span className="font-semibold">${formatUSDT(vohaStats.techExpenses)}</span>
                   </div>
                   <div className="flex justify-between p-2 bg-white rounded">
                     <span className="text-gray-700">Постоянные расходы (50%):</span>
-                    <span className="font-semibold">${formatUSDT(vadyStats.fixedExpenses)}</span>
+                    <span className="font-semibold">${formatUSDT(vohaStats.fixedExpenses)}</span>
                   </div>
                   <div className="flex justify-between p-2 bg-white rounded">
                     <span className="text-gray-700">Общие расходы (50%):</span>
-                    <span className="font-semibold">${formatUSDT(vadyStats.commonExpenses)}</span>
+                    <span className="font-semibold">${formatUSDT(vohaStats.commonExpenses)}</span>
                   </div>
                   {currentPeriod.calculation_version !== 'v1' && (
                     <div className="flex justify-between p-2 bg-white rounded">
                       <span className="text-gray-700">Выплаты клоузерам (гонорар):</span>
-                      <span className="font-semibold">${formatUSDT(vadyStats.closersExpenses)}</span>
+                      <span className="font-semibold">${formatUSDT(vohaStats.closersExpenses)}</span>
                     </div>
                   )}
                   <div className="flex justify-between p-2 bg-white rounded">
-                    <span className="text-gray-700">ЗП команды Вади:</span>
-                    <span className="font-semibold">${formatUSDT(vadyStats.teamSalaries)}</span>
+                    <span className="text-gray-700">ЗП команды Вохи:</span>
+                    <span className="font-semibold">${formatUSDT(vohaStats.teamSalaries)}</span>
                   </div>
                   <div className="flex justify-between p-2 bg-white rounded">
                     <span className="text-gray-700">50% ЗП IT отдела:</span>
@@ -645,21 +645,21 @@ export default function FinanceDashboard() {
                   </div>
                   <div className="mt-3 pt-3 border-t-2 border-red-300 flex justify-between">
                     <span className="font-bold text-red-900">ИТОГО РАСХОДОВ:</span>
-                    <span className="text-2xl font-bold text-red-700">${formatUSDT(vadyStats.totalExpenses)}</span>
+                    <span className="text-2xl font-bold text-red-700">${formatUSDT(vohaStats.totalExpenses)}</span>
                   </div>
                 </div>
               </div>
 
-              <div className={`p-4 rounded-lg border-2 ${vadyStats.netProfit >= 0 ? 'bg-emerald-100 border-emerald-500' : 'bg-red-100 border-red-500'}`}>
-                <h3 className={`font-semibold mb-2 ${vadyStats.netProfit >= 0 ? 'text-emerald-900' : 'text-red-900'}`}>
-                  {vadyStats.netProfit >= 0 ? '✅ Чистая прибыль' : '⚠️ Убыток'}
+              <div className={`p-4 rounded-lg border-2 ${vohaStats.netProfit >= 0 ? 'bg-emerald-100 border-emerald-500' : 'bg-red-100 border-red-500'}`}>
+                <h3 className={`font-semibold mb-2 ${vohaStats.netProfit >= 0 ? 'text-emerald-900' : 'text-red-900'}`}>
+                  {vohaStats.netProfit >= 0 ? '✅ Чистая прибыль' : '⚠️ Убыток'}
                 </h3>
-                <div className={`text-sm mb-2 ${vadyStats.netProfit >= 0 ? 'text-emerald-800' : 'text-red-800'}`}>
-                  ${formatUSDT(vadyStats.totalRevenue)} (выручка) - ${formatUSDT(vadyStats.totalExpenses)} (расходы) =
+                <div className={`text-sm mb-2 ${vohaStats.netProfit >= 0 ? 'text-emerald-800' : 'text-red-800'}`}>
+                  ${formatUSDT(vohaStats.totalRevenue)} (выручка) - ${formatUSDT(vohaStats.totalExpenses)} (расходы) =
                 </div>
                 <div className="text-center">
-                  <span className={`text-4xl font-bold ${vadyStats.netProfit >= 0 ? 'text-emerald-700' : 'text-red-700'}`}>
-                    ${formatUSDT(vadyStats.netProfit)}
+                  <span className={`text-4xl font-bold ${vohaStats.netProfit >= 0 ? 'text-emerald-700' : 'text-red-700'}`}>
+                    ${formatUSDT(vohaStats.netProfit)}
                   </span>
                 </div>
               </div>
