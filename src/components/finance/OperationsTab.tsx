@@ -271,21 +271,33 @@ export default function OperationsTab() {
       exchangeRate
     );
 
+<<<<<<< HEAD
     let finalManagerPercent = parseFloat(formData.managerPercent);
     if (isNaN(finalManagerPercent)) {
       finalManagerPercent = formData.type === 'растаможка' ? manager.percentRastamozhka : manager.percentDobiv;
     }
     const managerEarning = usdtAfterCommission * (finalManagerPercent / 100);
+=======
+    const mPercentNum = parseFloat(formData.managerPercent);
+    const mPercent = isNaN(mPercentNum) ? (formData.type === 'растаможка' ? manager.percentRastamozhka : manager.percentDobiv) : mPercentNum;
+    const managerEarning = usdtAfterCommission * (mPercent / 100);
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
 
     let closerEarning = 0;
     if (formData.type === 'добив' && formData.closerId) {
       const closer = employees.find(e => e.id === formData.closerId);
       if (closer) {
+<<<<<<< HEAD
         let finalCloserPercent = parseFloat(formData.closerPercent);
         if (isNaN(finalCloserPercent)) {
           finalCloserPercent = closer.role === 'manager' ? 5 : closer.percentDobiv;
         }
         closerEarning = usdtAfterCommission * (finalCloserPercent / 100);
+=======
+        const cPercentNum = parseFloat(formData.closerPercent);
+        const cPercent = isNaN(cPercentNum) ? (closer.role === 'manager' ? 5 : closer.percentDobiv) : cPercentNum;
+        closerEarning = usdtAfterCommission * (cPercent / 100);
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
       }
     }
 
@@ -753,29 +765,46 @@ export default function OperationsTab() {
                       </div>
                     </div>
 
+<<<<<<< HEAD
                     <div className="grid grid-cols-2 gap-3">
                       <div>
+=======
+                    <div className="flex gap-2">
+                      <div className="flex-1">
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
                         <Label htmlFor="managerId" className="text-xs">Менеджер *</Label>
                         <select
                           id="managerId"
                           className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           value={formData.managerId}
                           onChange={(e) => {
+<<<<<<< HEAD
                             const val = e.target.value;
                             const emp = employees.find(m => m.id === val);
                             const defPct = emp ? (formData.type === 'растаможка' ? emp.percentRastamozhka : emp.percentDobiv) : '';
                             setFormData({ ...formData, managerId: val, managerPercent: defPct.toString() });
+=======
+                            const mId = e.target.value;
+                            const mData = employees.find(emp => emp.id === mId);
+                            const mPercent = mData ? (formData.type === 'растаможка' ? mData.percentRastamozhka : mData.percentDobiv).toString() : '';
+                            setFormData({ ...formData, managerId: mId, managerPercent: mPercent });
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
                           }}
                           required
                         >
                           <option value="">Выберите</option>
                           {managers.map(manager => (
                             <option key={manager.id} value={manager.id}>
+<<<<<<< HEAD
                               {manager.name}
+=======
+                              {manager.name} ({manager.team === 'voha' ? 'Воха' : 'Офис'})
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
                             </option>
                           ))}
                         </select>
                       </div>
+<<<<<<< HEAD
                       <div>
                          <Label htmlFor="managerPercent" className="text-xs">Менеджер %</Label>
                          <Input
@@ -787,18 +816,40 @@ export default function OperationsTab() {
                            onChange={(e) => setFormData({ ...formData, managerPercent: e.target.value })}
                            className="mt-1"
                          />
+=======
+                      <div className="w-24">
+                        <Label htmlFor="managerPercent" className="text-xs">% *</Label>
+                        <Input
+                          id="managerPercent"
+                          type="number"
+                          step="0.1"
+                          min="0"
+                          max="100"
+                          placeholder="%"
+                          value={formData.managerPercent}
+                          onChange={(e) => setFormData({ ...formData, managerPercent: e.target.value })}
+                          required
+                          className="mt-1"
+                        />
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
                       </div>
                     </div>
 
                     {formData.type === 'добив' && (
+<<<<<<< HEAD
                       <div className="grid grid-cols-2 gap-3">
                         <div>
+=======
+                      <div className="flex gap-2">
+                        <div className="flex-1">
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
                           <Label htmlFor="closerId" className="text-xs">Кто добил *</Label>
                           <select
                             id="closerId"
                             className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={formData.closerId}
                             onChange={(e) => {
+<<<<<<< HEAD
                               const val = e.target.value;
                               const emp = employees.find(m => m.id === val);
                               let defPct = '';
@@ -806,6 +857,12 @@ export default function OperationsTab() {
                                 defPct = (emp.role === 'manager' ? '5' : emp.percentDobiv.toString());
                               }
                               setFormData({ ...formData, closerId: val, closerPercent: defPct });
+=======
+                              const cId = e.target.value;
+                              const cData = employees.find(emp => emp.id === cId);
+                              const cPercent = cData ? (cData.role === 'manager' ? 5 : cData.percentDobiv).toString() : '';
+                              setFormData({ ...formData, closerId: cId, closerPercent: cPercent });
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
                             }}
                             required={formData.type === 'добив'}
                           >
@@ -826,6 +883,7 @@ export default function OperationsTab() {
                             </optgroup>
                           </select>
                         </div>
+<<<<<<< HEAD
                         <div>
                            <Label htmlFor="closerPercent" className="text-xs">Кто добил %</Label>
                            <Input
@@ -837,6 +895,22 @@ export default function OperationsTab() {
                              onChange={(e) => setFormData({ ...formData, closerPercent: e.target.value })}
                              className="mt-1"
                            />
+=======
+                        <div className="w-24">
+                          <Label htmlFor="closerPercent" className="text-xs">% *</Label>
+                          <Input
+                            id="closerPercent"
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            max="100"
+                            placeholder="%"
+                            value={formData.closerPercent}
+                            onChange={(e) => setFormData({ ...formData, closerPercent: e.target.value })}
+                            required={formData.type === 'добив'}
+                            className="mt-1"
+                          />
+>>>>>>> 44692b9 (feat: updated percentages and operations logic)
                         </div>
                       </div>
                     )}

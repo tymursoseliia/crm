@@ -125,7 +125,7 @@ export const calculateEmployeeSalary = (
 
 
   const employeeOps = operations.filter(
-    op => op.managerId === employee.id || op.closerId === employee.id
+    op => op.managerId === employee.id || op.closerId === employee.id || (op.closerId === 'vanya_pasha' && (employee.id === 'vanya' || employee.id === 'pasha'))
   );
   let totalEarnings = 0;
   employeeOps.forEach(op => {
@@ -137,6 +137,9 @@ export const calculateEmployeeSalary = (
       }
       if (op.closerId === employee.id && op.closerEarning) {
         totalEarnings += op.closerEarning;
+      }
+      if (op.closerId === 'vanya_pasha' && (employee.id === 'vanya' || employee.id === 'pasha') && op.closerEarning) {
+        totalEarnings += op.closerEarning / 2;
       }
     }
   });

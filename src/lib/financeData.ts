@@ -31,6 +31,7 @@ const vohaTeam: Employee[] = [
   { id: 'tyazhik', name: 'Тяжик', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
   { id: 'borchik', name: 'Борчик', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false },
   { id: 'vanya_pasha_2in1', name: 'Ваня + Пашка (2 в 1)', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 5, percentDobiv: 5, percentProfit: 0, isSpecial: false },
+  { id: 'voha', name: 'Воха', role: 'manager', team: 'voha', salary: 0, percentRastamozhka: 15, percentDobiv: 10, percentProfit: 0, isSpecial: false, percentDobivDyadya: 5 },
 ];
 
 
@@ -43,6 +44,7 @@ const closers: Employee[] = [
   { id: 'stone_island_closer', name: 'Stone Island', role: 'closer', team: null, salary: 0, percentRastamozhka: 0, percentDobiv: 0, percentProfit: 0, isSpecial: false },
   { id: 'malish_closer', name: 'Малыш', role: 'closer', team: null, salary: 0, percentRastamozhka: 0, percentDobiv: 0, percentProfit: 0, isSpecial: false },
   { id: 'dyadya_closer', name: 'Дядя', role: 'closer', team: null, salary: 0, percentRastamozhka: 0, percentDobiv: 0, percentProfit: 0, isSpecial: false },
+  { id: 'vanya_pasha', name: 'Ваня + Паша (Вместе)', role: 'closer', team: null, salary: 0, percentRastamozhka: 0, percentDobiv: 10, percentProfit: 0, isSpecial: false },
 ];
 
 // IT отдел
